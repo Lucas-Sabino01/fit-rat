@@ -137,6 +137,8 @@ export default function HomeScreen() {
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 3)}>
             <TouchableOpacity
               activeOpacity={0.85}
+              accessibilityRole="button"
+              accessibilityLabel="Começar treino agora"
               onPress={() => { trigger('heavy'); router.push('/(tabs)/workout'); }}
             >
               <LinearGradient colors={[...Gradients.primaryCta]} style={s.ctaButton}>
@@ -149,7 +151,13 @@ export default function HomeScreen() {
 
           {/* ─── Quick Actions ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 4)} style={s.actionsRow}>
-            <TouchableOpacity style={s.actionCard} activeOpacity={0.7} onPress={handleMicroWorkout}>
+            <TouchableOpacity 
+              style={s.actionCard} 
+              activeOpacity={0.7} 
+              accessibilityRole="button"
+              accessibilityLabel="Realizar um micro treino rápido de 3 minutos"
+              onPress={handleMicroWorkout}
+            >
               <View style={[s.actionIconBg, { backgroundColor: Colors.streakBg }]}>
                 <Ionicons name="flash" size={22} color={Colors.streak} />
               </View>
@@ -157,7 +165,13 @@ export default function HomeScreen() {
               <Text style={[s.actionSub, { color: Colors.streak }]}>3 min</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={s.actionCard} activeOpacity={0.7} onPress={handleActiveRest}>
+            <TouchableOpacity 
+              style={s.actionCard} 
+              activeOpacity={0.7} 
+              accessibilityRole="button"
+              accessibilityLabel="Fazer descanso ativo para manter a ofensiva"
+              onPress={handleActiveRest}
+            >
               <View style={[s.actionIconBg, { backgroundColor: Colors.successBg }]}>
                 <Ionicons name="body" size={22} color={Colors.success} />
               </View>
@@ -165,7 +179,13 @@ export default function HomeScreen() {
               <Text style={[s.actionSub, { color: Colors.success }]}>Manter ofensiva</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={s.actionCard} activeOpacity={0.7} onPress={handleUseTicket}>
+            <TouchableOpacity 
+              style={s.actionCard} 
+              activeOpacity={0.7} 
+              accessibilityRole="button"
+              accessibilityLabel={`Usar ticket de descanso. Você tem ${restTickets} restantes`}
+              onPress={handleUseTicket}
+            >
               <View style={[s.actionIconBg, { backgroundColor: Colors.primaryBg }]}>
                 <Ionicons name="ticket" size={22} color={Colors.primary} />
                 <View style={s.ticketBadge}>

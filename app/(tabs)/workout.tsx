@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Alert, Platform, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Alert, Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -107,10 +107,15 @@ export default function WorkoutScreen() {
 
     return (
       <MobileContainer>
-        <View style={s.focusScreen}>
+        <KeyboardAvoidingView 
+          style={s.focusScreen}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
           <StatusBar barStyle="light-content" />
           <View style={s.activeHeader}>
             <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel="Cancelar treino"
               onPress={() => {
                 trigger('medium');
                 Alert.alert('Cancelar treino?', 'Você perderá o progresso.', [
@@ -131,6 +136,8 @@ export default function WorkoutScreen() {
             </View>
             <TouchableOpacity
               style={s.finishBtn}
+              accessibilityRole="button"
+              accessibilityLabel="Finalizar treino"
               onPress={() => {
                 trigger('success');
                 const result = finishWorkout(2);
@@ -174,6 +181,8 @@ export default function WorkoutScreen() {
                       <Text style={s.exHistory}>Último treino: 3 séries x 12 reps @ 20kg</Text>
                     </View>
                     <TouchableOpacity 
+                      accessibilityRole="button"
+                      accessibilityLabel={`Trocar exercício ${ex.name}`}
                       onPress={() => setSwapData({ index: exIdx, id: ex.exerciseId, muscle: ex.muscleGroup })}
                       style={s.swapBtn}
                     >
@@ -196,6 +205,8 @@ export default function WorkoutScreen() {
                     
                     <TouchableOpacity 
                       style={[s.setTypeBtn, { flex: 0.5 }]} 
+                      accessibilityRole="button"
+                      accessibilityLabel={`Alterar tipo da série ${set.id}, atual é ${getSetTypeLabel(set.setType)}`}
                       onPress={() => cycleSetType(exIdx, setIdx, set.setType)}
                     >
                       <Text style={[s.setTypeText, { color: getSetTypeColor(set.setType) }]}>
@@ -212,6 +223,7 @@ export default function WorkoutScreen() {
                         keyboardType="numeric"
                         placeholder="—"
                         placeholderTextColor={Colors.textDisabled}
+                        accessibilityLabel={`Peso da série ${set.id} em quilos`}
                         value={set.weight ? String(set.weight) : ''}
                         onChangeText={(val) => {
                           const num = val.replace(/[^0-9.]/g, '');
@@ -226,6 +238,7 @@ export default function WorkoutScreen() {
                         keyboardType="numeric"
                         placeholder="—"
                         placeholderTextColor={Colors.textDisabled}
+                        accessibilityLabel={`Repetições da série ${set.id}`}
                         value={set.reps ? String(set.reps) : ''}
                         onChangeText={(val) => {
                           const num = val.replace(/[^0-9]/g, '');
@@ -247,6 +260,8 @@ export default function WorkoutScreen() {
                       </TouchableOpacity>
 
                       <TouchableOpacity
+                        accessibilityRole="button"
+                        accessibilityLabel={set.isCompleted ? `Desmarcar série ${set.id}` : `Concluir série ${set.id}`}
                         onPress={() => {
                           if (!set.isCompleted) {
                             trigger('success');
@@ -282,7 +297,7 @@ export default function WorkoutScreen() {
               />
             </Animated.View>
           )}
-        </View>
+        </KeyboardAvoidingView>
 
         {/* Premium Modals */}
         {detailsExerciseId && (
@@ -344,6 +359,8 @@ export default function WorkoutScreen() {
             <Animated.View key={t.id} entering={FadeInDown.duration(400).delay(i * Stagger.fast + 100)}>
               <TouchableOpacity
                 activeOpacity={0.75}
+                accessibilityRole="button"
+                accessibilityLabel={`Iniciar treino ${t.name}`}
                 onPress={() => { trigger('heavy'); startWorkout(t.id); }}
               >
                 <View style={[s.templateCard, t.isCustom && s.customTemplateCard]}>

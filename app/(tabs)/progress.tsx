@@ -14,6 +14,7 @@ import { useWorkoutStore } from '@/stores/useWorkoutStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { MobileContainer } from '@/components/ui/MobileContainer';
 import { RatMascot } from '@/components/mascot/RatMascot';
+import { Skeleton } from '@/components/ui/Skeleton';
 
 const MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 const WEEK_DAYS = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -24,8 +25,15 @@ export default function ProgressScreen() {
   const { workoutHistory } = useWorkoutStore();
   const { totalWorkouts, totalVolume } = useProfileStore();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [currentMonth] = useState(new Date().getMonth());
   const [currentYear] = useState(new Date().getFullYear());
+
+  React.useEffect(() => {
+    // Simulate initial data loading to show skeletons
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
@@ -145,16 +153,32 @@ export default function ProgressScreen() {
                 <Text style={s.histTitle}>HISTÓRICO RECENTE</Text>
               </Animated.View>
 
-              {!hasHistory ? (
+              {!hasHistory && !isLoading ? (
                 <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast * 4)} style={s.emptyState}>
                   <RatMascot mood="sad" size={80} />
                   <Text style={s.emptyTitle}>Nenhum treino ainda</Text>
                   <Text style={s.emptyText}>Complete seu primeiro treino para ver o histórico aqui!</Text>
                 </Animated.View>
+              ) : isLoading ? (
+                <View>
+                  {[1, 2, 3].map((_, i) => (
+                    <View key={`skel-${i}`} style={[s.histCard, { borderColor: 'transparent' }]}>
+                      <Skeleton width={40} height={40} borderRadius={12} />
+                      <View style={{ flex: 1, gap: 6 }}>
+                        <Skeleton width="60%" height={14} />
+                        <Skeleton width="40%" height={12} />
+                      </View>
+                    </View>
+                  ))}
+                </View>
               ) : (
                 workoutHistory.slice(0, 5).map((h, i) => (
                   <Animated.View key={h.id} entering={FadeInDown.duration(300).delay(Stagger.fast * 4 + i * 50)}>
-                    <View style={s.histCard}>
+                    <TouchableOpacity 
+                      style={s.histCard}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Ver detalhes do treino ${h.name}`}
+                    >
                       <View style={s.histIconBg}>
                         <Ionicons name="barbell" size={18} color={Colors.primary} />
                       </View>
@@ -166,7 +190,7 @@ export default function ProgressScreen() {
                         <Text style={s.histXP}>+{h.xpEarned} XP</Text>
                         <Text style={s.histVol}>{Math.round(h.volume).toLocaleString()}kg</Text>
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   </Animated.View>
                 ))
               )}
