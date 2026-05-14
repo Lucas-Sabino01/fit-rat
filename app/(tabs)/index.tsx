@@ -80,6 +80,11 @@ export default function HomeScreen() {
                 <Ionicons name="flame" size={14} color={Colors.streak} />
                 <Text style={[s.badgeText, { color: Colors.streak }]}>{currentStreak}</Text>
               </View>
+              <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/leaderboard' as any)}>
+                <View style={[s.badge, { borderColor: Colors.evolution + '40', paddingHorizontal: 10 }]}>
+                  <Ionicons name="shield" size={14} color={Colors.evolution} />
+                </View>
+              </TouchableOpacity>
               <View style={[s.badge, { borderColor: Colors.xp + '40' }]}>
                 <Ionicons name="star" size={14} color={Colors.xp} />
                 <Text style={[s.badgeText, { color: Colors.xp }]}>{xp.toLocaleString('pt-BR')}</Text>

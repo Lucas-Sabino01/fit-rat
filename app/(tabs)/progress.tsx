@@ -228,12 +228,45 @@ export default function ProgressScreen() {
                 )}
               </View>
 
-              <Text style={[s.histTitle, { marginTop: 20 }]}>CARGA MÁXIMA ESTIMADA</Text>
+              <Text style={[s.histTitle, { marginTop: 20 }]}>CARGA MÁXIMA ESTIMADA (1RM)</Text>
               <View style={s.calCard}>
-                <View style={s.placeholderFeature}>
-                  <Ionicons name="lock-closed" size={32} color={Colors.textDisabled} />
-                  <Text style={s.placeholderTitle}>Em Breve</Text>
-                  <Text style={s.placeholderSub}>Você poderá acompanhar seu 1RM de exercícios base como Supino, Agachamento e Terra.</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 }}>
+                  <View>
+                    <Text style={{ color: Colors.textPrimary, fontSize: 16, fontWeight: '800' }}>Supino Reto</Text>
+                    <Text style={{ color: Colors.textMuted, fontSize: 12, marginTop: 2 }}>Últimos 6 meses</Text>
+                  </View>
+                  <View style={{ alignItems: 'flex-end' }}>
+                    <Text style={{ color: Colors.streak, fontSize: 20, fontWeight: '900' }}>80 kg</Text>
+                    <Text style={{ color: Colors.success, fontSize: 12, fontWeight: '700' }}>+20kg (Ano)</Text>
+                  </View>
+                </View>
+                
+                <View style={s.chartContainer}>
+                  <View style={s.chartYAxis}>
+                    <Text style={s.chartYLabel}>80</Text>
+                    <Text style={s.chartYLabel}>70</Text>
+                    <Text style={s.chartYLabel}>60</Text>
+                  </View>
+                  <View style={s.chartBars}>
+                    {[60, 62, 65, 70, 75, 80].map((weight, i) => {
+                      const heightPerc = ((weight - 50) / 35) * 100; // Mock normalization
+                      return (
+                        <View key={i} style={[s.chartBarCol, { width: 35 }]}>
+                          <View style={{ flex: 1, justifyContent: 'flex-end', width: '100%', alignItems: 'center', marginBottom: 8 }}>
+                            <Animated.View 
+                              entering={FadeInDown.duration(600).delay(i * 100)} 
+                              style={{ height: `${heightPerc}%`, width: 4, backgroundColor: Colors.streak, borderRadius: 2 }}
+                            />
+                            <Animated.View 
+                              entering={FadeInDown.duration(600).delay(i * 100 + 100)} 
+                              style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: Colors.bgCard, borderWidth: 3, borderColor: Colors.streak, position: 'absolute', bottom: `${heightPerc}%`, transform: [{translateY: 6}] }}
+                            />
+                          </View>
+                          <Text style={s.chartXLabel}>{['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'][i]}</Text>
+                        </View>
+                      );
+                    })}
+                  </View>
                 </View>
               </View>
             </Animated.View>

@@ -38,6 +38,9 @@ export default function RootLayout() {
       >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="onboarding" />
+        <Stack.Screen name="settings" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="leaderboard" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="exercises" options={{ presentation: 'modal' }} />
       </Stack>
       <StatusBar style="light" backgroundColor={Colors.bg} />
     </>

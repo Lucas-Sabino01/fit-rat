@@ -54,8 +54,13 @@ export default function ProfileScreen() {
     <MobileContainer>
       <View style={s.screen}>
         <StatusBar barStyle="light-content" />
-        <View style={s.header}>
-          <Text style={s.title}>PERFIL</Text>
+        <View style={[s.header, { paddingBottom: 0 }]}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+            <Text style={[s.title, { marginBottom: 0 }]}>PERFIL</Text>
+            <TouchableOpacity onPress={() => router.push('/settings' as any)} style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: Colors.bgCard, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: Colors.border }}>
+              <Ionicons name="settings-outline" size={20} color={Colors.textSecondary} />
+            </TouchableOpacity>
+          </View>
           <View style={s.tabContainer}>
             <TouchableOpacity 
               style={[s.tabBtn, activeTab === 'stats' && s.tabBtnActive]} 
@@ -195,9 +200,25 @@ export default function ProfileScreen() {
                       <Text style={s.graphSubtitle}>Últimos 30 dias</Text>
                     </View>
                   </View>
-                  <View style={s.graphPlaceholder}>
-                    <Ionicons name="analytics" size={48} color={Colors.border} />
-                    <Text style={s.graphPlaceholderText}>Gráfico em breve</Text>
+                  <View style={{ height: 140, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', paddingTop: 20 }}>
+                    {[78.2, 77.8, 77.1, 76.5, 76.0, 75.5].map((w, i) => {
+                      const heightPerc = ((w - 74) / 5) * 100;
+                      return (
+                        <View key={i} style={{ alignItems: 'center', width: 40, height: '100%', justifyContent: 'flex-end' }}>
+                          <View style={{ flex: 1, justifyContent: 'flex-end', width: '100%', alignItems: 'center', marginBottom: 8 }}>
+                            <Animated.View 
+                              entering={FadeInDown.duration(600).delay(i * 100)} 
+                              style={{ height: `${heightPerc}%`, width: 4, backgroundColor: Colors.primary, borderRadius: 2 }}
+                            />
+                            <Animated.View 
+                              entering={FadeInDown.duration(600).delay(i * 100 + 100)} 
+                              style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: Colors.bgCard, borderWidth: 2.5, borderColor: Colors.primary, position: 'absolute', bottom: `${heightPerc}%`, transform: [{translateY: 5}] }}
+                            />
+                          </View>
+                          <Text style={{ color: Colors.textMuted, fontSize: 10, fontWeight: '700' }}>{w}</Text>
+                        </View>
+                      );
+                    })}
                   </View>
                 </View>
               </Animated.View>

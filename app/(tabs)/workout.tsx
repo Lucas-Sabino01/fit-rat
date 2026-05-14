@@ -336,10 +336,15 @@ export default function WorkoutScreen() {
               <Text style={s.title}>TREINAR</Text>
               <Text style={s.subtitle}>Força · Construção</Text>
             </View>
-            <TouchableOpacity onPress={() => router.push('/workout/builder' as any)} style={s.createBtn}>
-              <Ionicons name="add" size={20} color="#fff" />
-              <Text style={s.createBtnText}>NOVO</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => router.push('/exercises' as any)} style={[s.createBtn, { backgroundColor: Colors.bgCard, borderWidth: 1, borderColor: Colors.border, paddingHorizontal: 10 }]}>
+                <Ionicons name="library" size={18} color={Colors.textPrimary} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/workout/builder' as any)} style={s.createBtn}>
+                <Ionicons name="add" size={20} color="#fff" />
+                <Text style={s.createBtnText}>NOVO</Text>
+              </TouchableOpacity>
+            </View>
           </Animated.View>
 
           {/* Week days */}
