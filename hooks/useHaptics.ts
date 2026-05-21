@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Haptics Hook
- * Wrapper around expo-haptics for standardized feedback
- */
-
 import * as Haptics from 'expo-haptics';
 import { Platform } from 'react-native';
 
@@ -10,7 +5,7 @@ type FeedbackType = 'light' | 'medium' | 'heavy' | 'success' | 'error' | 'select
 
 export function useHaptics() {
   const trigger = (type: FeedbackType = 'light') => {
-    if (Platform.OS === 'web') return; // No haptics on web
+    if (Platform.OS === 'web') return;
 
     switch (type) {
       case 'light':

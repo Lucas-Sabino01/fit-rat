@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Streak Counter Component
- * Animated counter showing current streak with fire effect
- */
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, FontSizes, FontWeights, Spacing, BorderRadius } from '@/constants/theme';

@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Profile Screen (v2 Redesign)
- * Premium profile with colored sections, mascot moods & Body Tracker
- */
-
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar, Platform, TouchableOpacity, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -25,8 +20,6 @@ export default function ProfileScreen() {
   const { currentStreak, bestStreak } = useStreakStore();
   
   const [activeTab, setActiveTab] = useState<'stats' | 'measurements'>('stats');
-  
-  // Fake state for measurements demo
   const [weight, setWeight] = useState('75.5');
   const [bodyFat, setBodyFat] = useState('15');
 
@@ -80,7 +73,6 @@ export default function ProfileScreen() {
         <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
           {activeTab === 'stats' ? (
             <Animated.View entering={FadeIn.duration(300)} key="stats">
-              {/* Profile Card */}
               <Animated.View entering={FadeInDown.duration(400)}>
                 <LinearGradient colors={[Colors.evolution + '15', Colors.bg]} style={s.profileCard}>
                   <RatMascot mood={getMascotMood() as any} size={100} />
@@ -91,7 +83,6 @@ export default function ProfileScreen() {
                       <Text style={s.levelNum}>{level}</Text>
                     </LinearGradient>
                   </View>
-                  {/* XP Bar */}
                   <View style={s.xpContainer}>
                     <View style={s.xpRow}>
                       <Text style={s.xpLabel}>{xp.toLocaleString('pt-BR')} XP</Text>
@@ -109,7 +100,6 @@ export default function ProfileScreen() {
                 </LinearGradient>
               </Animated.View>
 
-              {/* Stats */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast)} style={s.statsRow}>
                 {stats.map((st, i) => (
                   <View key={i} style={s.statCard}>
@@ -122,7 +112,6 @@ export default function ProfileScreen() {
                 ))}
               </Animated.View>
 
-              {/* Rat Evolution */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast * 2)}>
                 <Text style={[s.sectionTitle, { color: Colors.evolution }]}>
                   <Ionicons name="sparkles" size={14} color={Colors.evolution} /> EVOLUÇÃO DO RATO
@@ -151,7 +140,6 @@ export default function ProfileScreen() {
                 </ScrollView>
               </Animated.View>
 
-              {/* Belts */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast * 3)}>
                 <Text style={[s.sectionTitle, { color: Colors.xp }]}>
                   <Ionicons name="ribbon" size={14} color={Colors.xp} /> MINHAS FAIXAS
@@ -190,7 +178,6 @@ export default function ProfileScreen() {
             </Animated.View>
           ) : (
             <Animated.View entering={FadeIn.duration(300)} key="measurements">
-              {/* Fake Weight Chart Placeholder */}
               <Animated.View entering={FadeInDown.duration(400)}>
                 <View style={s.graphCard}>
                   <View style={s.graphHeader}>
@@ -223,7 +210,6 @@ export default function ProfileScreen() {
                 </View>
               </Animated.View>
 
-              {/* Inputs */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast)}>
                 <Text style={s.sectionTitle}>MEDIDAS ATUAIS</Text>
                 <View style={s.measurementsGrid}>
@@ -250,7 +236,6 @@ export default function ProfileScreen() {
                 </TouchableOpacity>
               </Animated.View>
 
-              {/* Photos */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast * 2)}>
                 <Text style={[s.sectionTitle, { marginTop: 20 }]}>FOTOS DE PROGRESSO</Text>
                 <View style={s.photosGrid}>
@@ -287,8 +272,6 @@ const s = StyleSheet.create({
   tabText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
   tabTextActive: { color: Colors.textPrimary },
   content: { paddingHorizontal: 20, paddingTop: 16 },
-  
-  // Profile card
   profileCard: { borderRadius: BorderRadius['2xl'], padding: 28, alignItems: 'center', borderWidth: 1, borderColor: Colors.border, marginBottom: 16 },
   profileName: { color: Colors.textPrimary, fontSize: 22, fontWeight: '800', marginTop: 16 },
   levelRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 8, marginBottom: 20 },
@@ -301,21 +284,17 @@ const s = StyleSheet.create({
   xpTarget: { color: Colors.xp, fontSize: 12, fontWeight: '600' },
   xpBarOuter: { height: 8, backgroundColor: Colors.bgSurface, borderRadius: BorderRadius.full, overflow: 'hidden' },
   xpBarInner: { height: '100%', borderRadius: BorderRadius.full },
-  // Stats
   statsRow: { flexDirection: 'row', gap: 8, marginBottom: 20 },
   statCard: { flex: 1, backgroundColor: Colors.bgCard, borderRadius: BorderRadius.lg, padding: 12, alignItems: 'center', borderWidth: 1, borderColor: Colors.border },
   statIconBg: { width: 32, height: 32, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginBottom: 6 },
   statValue: { color: Colors.textPrimary, fontSize: 18, fontWeight: '900' },
   statLabel: { color: Colors.textMuted, fontSize: 10, fontWeight: '600', marginTop: 3 },
-  // Section titles
   sectionTitle: { fontSize: 13, fontWeight: '800', letterSpacing: 1.5, marginBottom: 14, marginTop: 4, color: Colors.textMuted },
-  // Evolution
   evoRow: { gap: 14, paddingRight: 20, marginBottom: 20 },
   evoCard: { alignItems: 'center', width: 72 },
   evoCircle: { width: 54, height: 54, borderRadius: 27, backgroundColor: Colors.bgCard, borderWidth: 1.5, borderColor: Colors.border, justifyContent: 'center', alignItems: 'center' },
   evoLabel: { color: Colors.textMuted, fontSize: 11, fontWeight: '600', marginTop: 6, textAlign: 'center' },
   evoLevel: { color: Colors.textDisabled, fontSize: 10, marginTop: 2 },
-  // Belts
   beltsRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 },
   beltItem: { alignItems: 'center', flex: 1 },
   beltCircle: { width: 48, height: 48, borderRadius: 24, borderWidth: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.bgCard },
@@ -323,8 +302,6 @@ const s = StyleSheet.create({
   beltReq: { color: Colors.textDisabled, fontSize: 9, marginTop: 2 },
   resetBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 20, paddingVertical: 12 },
   resetBtnText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
-  
-  // Measurements
   graphCard: { backgroundColor: Colors.bgCard, borderRadius: BorderRadius.xl, padding: 20, borderWidth: 1, borderColor: Colors.border, marginBottom: 24 },
   graphHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 16 },
   graphTitle: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },

@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Trail Screen (v2 Redesign)
- * Duolingo-inspired visual trail with colored nodes and path connectors
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -48,13 +43,11 @@ export default function TrailScreen() {
       <View style={s.screen}>
         <StatusBar barStyle="light-content" />
         <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
-          {/* Header */}
           <Animated.View entering={FadeInDown.duration(400)} style={s.header}>
             <Text style={s.title}>TRILHA</Text>
             <Text style={s.subtitle}>Sua jornada fitness</Text>
           </Animated.View>
 
-          {/* Current phase summary */}
           <Animated.View entering={FadeInDown.duration(400).delay(Stagger.normal)}>
             <LinearGradient colors={[currentPhase.color + '15', Colors.bg]} style={s.currentCard}>
               <View style={[s.currentIcon, { backgroundColor: currentPhase.color + '20' }]}>
@@ -73,7 +66,6 @@ export default function TrailScreen() {
             </LinearGradient>
           </Animated.View>
 
-          {/* Trail */}
           <Animated.View entering={FadeInDown.duration(400).delay(Stagger.normal * 2)} style={s.trail}>
             <Text style={s.trailTitle}>Fases da Jornada</Text>
             {PHASES.map((phase, i) => {
@@ -101,7 +93,6 @@ export default function TrailScreen() {
             })}
           </Animated.View>
 
-          {/* Motivation */}
           <Animated.View entering={FadeInDown.duration(400).delay(Stagger.normal * 3)}>
             <View style={s.motivCard}>
               <Ionicons name="sparkles" size={20} color={Colors.xp} />
@@ -129,7 +120,6 @@ const s = StyleSheet.create({
   header: { paddingTop: Platform.OS === 'web' ? 20 : 54, paddingBottom: 16 },
   title: { color: Colors.textPrimary, fontSize: 28, fontWeight: '900', letterSpacing: 1 },
   subtitle: { color: Colors.trail, fontSize: 14, fontWeight: '600', marginTop: 4 },
-  // Current phase
   currentCard: { borderRadius: BorderRadius.xl, padding: 18, flexDirection: 'row', alignItems: 'center', gap: 14, borderWidth: 1, borderColor: Colors.border, marginBottom: 24 },
   currentIcon: { width: 50, height: 50, borderRadius: 16, justifyContent: 'center', alignItems: 'center' },
   currentLabel: { color: Colors.textMuted, fontSize: 10, fontWeight: '700', letterSpacing: 1.5 },
@@ -137,10 +127,8 @@ const s = StyleSheet.create({
   currentSub: { color: Colors.textSecondary, fontSize: 12, marginTop: 2 },
   currentProgress: { alignItems: 'center' },
   currentPercent: { fontSize: 22, fontWeight: '900' },
-  // Trail
   trail: { paddingLeft: 4, marginBottom: 20 },
   trailTitle: { color: Colors.textSecondary, fontSize: 13, fontWeight: '700', letterSpacing: 1, marginBottom: 16, textTransform: 'uppercase' },
-  // Motivation
   motivCard: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: Colors.bgCard, borderRadius: BorderRadius.lg, padding: 16, borderWidth: 1, borderColor: Colors.border },
   motivText: { color: Colors.textSecondary, fontSize: 13, flex: 1, lineHeight: 19 },
 });

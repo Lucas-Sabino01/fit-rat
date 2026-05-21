@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Home Dashboard (v2 Redesign)
- * Colorful, engaging, Duolingo-inspired home screen
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -38,8 +33,6 @@ export default function HomeScreen() {
   const currentBelt = getCurrentBelt(currentStreak);
   const nextBelt = getNextBelt(currentStreak);
   const tipOfDay = TIPS[new Date().getDay() % TIPS.length];
-
-  // Determine mascot mood based on state
   const mascotMood = currentStreak >= 14 ? 'flexing' : currentStreak >= 7 ? 'excited' : currentStreak >= 1 ? 'happy' : 'sad';
 
   const handleMicroWorkout = () => {
@@ -67,7 +60,6 @@ export default function HomeScreen() {
         <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
         <ScrollView style={s.scroll} contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={false}>
 
-          {/* ─── Header ─── */}
           <Animated.View entering={FadeInDown.duration(400)} style={s.header}>
             <View>
               <Text style={s.logo}>
@@ -92,7 +84,6 @@ export default function HomeScreen() {
             </View>
           </Animated.View>
 
-          {/* ─── Hero ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal)}>
             <LinearGradient
               colors={['#1A1222', '#15101E', Colors.bg]}
@@ -113,7 +104,6 @@ export default function HomeScreen() {
             </LinearGradient>
           </Animated.View>
 
-          {/* ─── XP Bar ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 2)} style={s.xpSection}>
             <View style={s.xpHeader}>
               <View style={s.levelBadgeWrap}>
@@ -138,7 +128,6 @@ export default function HomeScreen() {
             </View>
           </Animated.View>
 
-          {/* ─── CTA ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 3)}>
             <TouchableOpacity
               activeOpacity={0.85}
@@ -154,7 +143,6 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </Animated.View>
 
-          {/* ─── Quick Actions ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 4)} style={s.actionsRow}>
             <TouchableOpacity 
               style={s.actionCard} 
@@ -202,7 +190,6 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </Animated.View>
 
-          {/* ─── Streak Card ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 5)}>
             <View style={s.streakCard}>
               <View style={s.streakTop}>
@@ -241,7 +228,6 @@ export default function HomeScreen() {
             </View>
           </Animated.View>
 
-          {/* ─── Tip Card ─── */}
           <Animated.View entering={FadeInDown.duration(450).delay(Stagger.normal * 6)}>
             <View style={s.tipCard}>
               <View style={s.tipIconBg}>
@@ -265,7 +251,6 @@ const s = StyleSheet.create({
   screen: { flex: 1, backgroundColor: Colors.bg },
   scroll: { flex: 1 },
   scrollContent: { paddingHorizontal: 20 },
-  // Header
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: Platform.OS === 'web' ? 20 : 54, paddingBottom: 12 },
   logo: { fontSize: 24, fontWeight: '900' },
   logoFit: { color: Colors.textPrimary },
@@ -273,14 +258,12 @@ const s = StyleSheet.create({
   headerBadges: { flexDirection: 'row', gap: 8 },
   badge: { flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: Colors.bgCard, paddingHorizontal: 12, paddingVertical: 7, borderRadius: BorderRadius.full, borderWidth: 1 },
   badgeText: { fontSize: 13, fontWeight: '700' },
-  // Hero
   hero: { borderRadius: BorderRadius.xl, marginBottom: 16, overflow: 'hidden', borderWidth: 1, borderColor: Colors.border },
   heroContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 24, paddingHorizontal: 20 },
   heroText: { flex: 1, marginRight: 10 },
   heroGreeting: { color: Colors.textSecondary, fontSize: 13, fontWeight: '600', letterSpacing: 2 },
   heroName: { color: Colors.textPrimary, fontSize: 34, fontWeight: '900', lineHeight: 40, marginTop: 2 },
   heroSub: { color: Colors.textMuted, fontSize: 13, marginTop: 10, lineHeight: 19 },
-  // XP
   xpSection: { marginBottom: 16 },
   xpHeader: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   levelBadgeWrap: { ...({ shadowColor: Colors.evolution, shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.4, shadowRadius: 10, elevation: 8 }) },
@@ -292,10 +275,8 @@ const s = StyleSheet.create({
   xpValue: { color: Colors.xp, fontSize: 12, fontWeight: '600' },
   xpBarOuter: { height: 8, backgroundColor: Colors.bgSurface, borderRadius: BorderRadius.full, overflow: 'hidden' },
   xpBarInner: { height: '100%', borderRadius: BorderRadius.full },
-  // CTA
   ctaButton: { borderRadius: BorderRadius.lg, paddingVertical: 18, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 16, ...({ shadowColor: Colors.primary, shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.4, shadowRadius: 16, elevation: 10 }) },
   ctaText: { color: '#fff', fontSize: 16, fontWeight: '800', letterSpacing: 1.5 },
-  // Actions
   actionsRow: { flexDirection: 'row', gap: 10, marginBottom: 16 },
   actionCard: { flex: 1, borderRadius: BorderRadius.lg, overflow: 'hidden', borderWidth: 1, borderColor: Colors.border, backgroundColor: Colors.bgCard, paddingVertical: 18, paddingHorizontal: 10, alignItems: 'center', gap: 8 },
   actionIconBg: { width: 46, height: 46, borderRadius: 15, justifyContent: 'center', alignItems: 'center' },
@@ -303,7 +284,6 @@ const s = StyleSheet.create({
   actionSub: { fontSize: 10, fontWeight: '700', textAlign: 'center' },
   ticketBadge: { position: 'absolute', top: -5, right: -7, backgroundColor: Colors.primary, borderRadius: 8, width: 17, height: 17, justifyContent: 'center', alignItems: 'center' },
   ticketBadgeText: { color: '#fff', fontSize: 9, fontWeight: '800' },
-  // Streak
   streakCard: { borderRadius: BorderRadius.xl, padding: 20, borderWidth: 1, borderColor: Colors.border, marginBottom: 16, backgroundColor: Colors.bgCard },
   streakTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   streakLabel: { color: Colors.textMuted, fontSize: 11, fontWeight: '700', letterSpacing: 1.5, marginBottom: 8 },
@@ -318,7 +298,6 @@ const s = StyleSheet.create({
   beltName: { fontSize: 11, fontWeight: '700', marginTop: 6 },
   beltProgress: { width: 70, height: 4, backgroundColor: Colors.bgSurface, borderRadius: 4, marginTop: 6, overflow: 'hidden' },
   beltProgressFill: { height: '100%', borderRadius: 4 },
-  // Tip
   tipCard: { flexDirection: 'row', gap: 14, backgroundColor: Colors.bgCard, borderRadius: BorderRadius.lg, padding: 16, borderWidth: 1, borderColor: Colors.border, borderLeftWidth: 3, borderLeftColor: Colors.xp },
   tipIconBg: { width: 38, height: 38, borderRadius: 12, backgroundColor: Colors.xpBg, justifyContent: 'center', alignItems: 'center', marginTop: 2 },
   tipContent: { flex: 1 },

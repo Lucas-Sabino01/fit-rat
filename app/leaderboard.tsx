@@ -1,7 +1,3 @@
-/**
- * Fit Rat — Leaderboard/Ranking Screen
- * Duolingo-inspired Leagues
- */
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,7 +21,6 @@ export default function LeaderboardScreen() {
   return (
     <MobileContainer>
       <View style={s.screen}>
-        {/* Header */}
         <View style={s.header}>
           <TouchableOpacity onPress={() => router.back()} style={s.backBtn}>
             <Ionicons name="close" size={24} color={Colors.textPrimary} />
@@ -35,7 +30,6 @@ export default function LeaderboardScreen() {
         </View>
 
         <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
-          {/* League Banner */}
           <LinearGradient colors={['#161B22', '#0D1117']} style={s.leagueBanner}>
             <View style={s.shieldBg}>
               <Ionicons name="shield" size={48} color={Colors.evolution} />
@@ -49,7 +43,6 @@ export default function LeaderboardScreen() {
             </View>
           </LinearGradient>
 
-          {/* List */}
           <View style={s.listContainer}>
             {MOCK_LEADERBOARD.map((user, index) => {
               const isTop3 = index < 3;

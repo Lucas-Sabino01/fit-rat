@@ -6,30 +6,26 @@ import { Colors, BorderRadius } from '@/constants/theme';
 interface PlateCalculatorModalProps {
   visible: boolean;
   onClose: () => void;
-  targetWeight: number; // Peso inicial vindo da série
+  targetWeight: number;
 }
 
-const AVAILABLE_PLATES = [25, 20, 15, 10, 5, 2.5, 1.25]; // Anilhas disponíveis
+const AVAILABLE_PLATES = [25, 20, 15, 10, 5, 2.5, 1.25];
 const PLATE_COLORS: Record<number, string> = {
-  25: '#FF3B30', // Vermelho
-  20: '#007AFF', // Azul
-  15: '#FFCC00', // Amarelo
-  10: '#34C759', // Verde
-  5: '#FFFFFF',  // Branco
-  2.5: '#000000', // Preto
-  1.25: '#8E8E93', // Prata
+  25: '#FF3B30',
+  20: '#007AFF',
+  15: '#FFCC00',
+  10: '#34C759',
+  5: '#FFFFFF',
+  2.5: '#000000',
+  1.25: '#8E8E93',
 };
 
 export function PlateCalculatorModal({ visible, onClose, targetWeight: initialWeight }: PlateCalculatorModalProps) {
   const [weight, setWeight] = useState(initialWeight.toString());
   const [barWeight, setBarWeight] = useState(20);
-
-  // Sincroniza se a prop mudar enquanto estiver aberto
   useEffect(() => {
     setWeight(initialWeight.toString());
   }, [initialWeight]);
-
-  // Calcula quais anilhas usar
   const calculatePlates = () => {
     const numWeight = Number(weight) || 0;
     let weightToFill = (numWeight - barWeight) / 2; // Peso para CADA lado
@@ -90,7 +86,6 @@ export function PlateCalculatorModal({ visible, onClose, targetWeight: initialWe
               <Text style={s.error}>{error}</Text>
             ) : (
               <>
-                {/* Representação Visual da Barra */}
                 <View style={s.barVisualizer}>
                   <View style={s.barbellLeft} />
                   <View style={s.platesContainer}>
@@ -102,8 +97,8 @@ export function PlateCalculatorModal({ visible, onClose, targetWeight: initialWe
                             s.visualPlate, 
                             { 
                               backgroundColor: PLATE_COLORS[p.weight],
-                              height: 60 + (p.weight * 1.5), // Maior peso = anilha mais alta
-                              width: p.weight >= 10 ? 16 : 10 // Maior peso = mais grossa
+                              height: 60 + (p.weight * 1.5),
+                              width: p.weight >= 10 ? 16 : 10
                             }
                           ]} 
                         />
@@ -113,7 +108,6 @@ export function PlateCalculatorModal({ visible, onClose, targetWeight: initialWe
                   <View style={s.barbellRight} />
                 </View>
 
-                {/* Lista de Anilhas para cada lado */}
                 <View style={s.platesList}>
                   <Text style={s.listTitle}>COLOQUE DE CADA LADO:</Text>
                   {numWeight === 0 && <Text style={s.listEmpty}>Digite um peso acima.</Text>}
@@ -148,13 +142,11 @@ const s = StyleSheet.create({
   textInput: { color: Colors.primary, fontSize: 24, fontWeight: '900', padding: 0 },
   
   error: { color: Colors.streak, fontSize: 14, textAlign: 'center', padding: 20 },
-  // Visualizer
   barVisualizer: { flexDirection: 'row', alignItems: 'center', height: 120, marginBottom: 24, paddingHorizontal: 20 },
   barbellLeft: { width: 40, height: 12, backgroundColor: '#8E8E93', borderTopLeftRadius: 6, borderBottomLeftRadius: 6 },
   barbellRight: { flex: 1, height: 12, backgroundColor: '#8E8E93', minWidth: 60 },
   platesContainer: { flexDirection: 'row', alignItems: 'center', gap: 2 },
   visualPlate: { borderRadius: 2, borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' },
-  // List
   platesList: { width: '100%', backgroundColor: Colors.bgSurface, borderRadius: BorderRadius.lg, padding: 16 },
   listTitle: { color: Colors.textMuted, fontSize: 12, fontWeight: '800', letterSpacing: 1, marginBottom: 12 },
   listEmpty: { color: Colors.textSecondary, fontSize: 14 },

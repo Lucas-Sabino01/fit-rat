@@ -1,9 +1,3 @@
-/**
- * Fit Rat — Celebration Screen Component
- * Fullscreen overlay celebrating workout completion
- * Replaces the native Alert.alert() with a proper celebration
- */
-
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -34,8 +28,6 @@ interface CelebrationScreenProps {
 }
 
 const { width: SCREEN_W } = Dimensions.get('window');
-
-// Confetti particle
 function ConfettiParticle({ delay, color, left }: { delay: number; color: string; left: number }) {
   const translateY = useSharedValue(-20);
   const opacity = useSharedValue(1);
@@ -71,7 +63,6 @@ export function CelebrationScreen({
   return (
     <View style={styles.overlay}>
       <LinearGradient colors={['rgba(13,17,23,0.97)', 'rgba(13,17,23,1)']} style={styles.gradient}>
-        {/* Confetti */}
         {Array.from({ length: 24 }).map((_, i) => (
           <ConfettiParticle
             key={i}
@@ -81,7 +72,6 @@ export function CelebrationScreen({
           />
         ))}
 
-        {/* Content */}
         <Animated.View entering={ZoomIn.duration(500).delay(200)} style={styles.mascotWrap}>
           <RatMascot mood="celebrating" size={120} />
         </Animated.View>
@@ -94,7 +84,6 @@ export function CelebrationScreen({
           Você é uma máquina, Ratão!
         </Animated.Text>
 
-        {/* Stats breakdown */}
         <Animated.View entering={FadeInUp.duration(500).delay(800)} style={styles.statsGrid}>
           <View style={styles.statItem}>
             <View style={[styles.statIcon, { backgroundColor: Colors.xpBg }]}>
@@ -129,7 +118,6 @@ export function CelebrationScreen({
           </View>
         </Animated.View>
 
-        {/* Level up banner */}
         {leveledUp && newLevel && (
           <Animated.View entering={ZoomIn.duration(600).delay(1200)} style={styles.levelUp}>
             <LinearGradient colors={[...Gradients.evolutionPurple]} style={styles.levelUpGradient}>
@@ -139,7 +127,6 @@ export function CelebrationScreen({
           </Animated.View>
         )}
 
-        {/* CTA */}
         <Animated.View entering={FadeInUp.duration(400).delay(1400)} style={styles.ctaWrap}>
           <TouchableOpacity onPress={onClose} activeOpacity={0.85}>
             <LinearGradient colors={[...Gradients.primaryCta]} style={styles.ctaBtn}>

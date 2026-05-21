@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Trail Node Component
- * Visual node for the trail/path screen
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,7 +19,7 @@ interface TrailNodeProps {
   color: string;
   icon: string;
   status: NodeStatus;
-  progress?: number; // 0–100 for current node
+  progress?: number;
   totalRequired?: number;
   currentCount?: number;
   onPress?: () => void;

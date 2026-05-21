@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Workout Screen (v2 Redesign)
- * Advanced Active Workout & Custom Templates (Premium Features)
- */
-
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Alert, Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -19,8 +14,6 @@ import { MobileContainer } from '@/components/ui/MobileContainer';
 import { CelebrationScreen } from '@/components/celebration/CelebrationScreen';
 import { RestTimer } from '@/components/workout/RestTimer';
 import { useHaptics } from '@/hooks/useHaptics';
-
-// Premium Modals
 import { ExerciseDetailsModal } from '@/components/workout/ExerciseDetailsModal';
 import { SwapExerciseModal } from '@/components/workout/SwapExerciseModal';
 import { PlateCalculatorModal } from '@/components/workout/PlateCalculatorModal';
@@ -36,17 +29,12 @@ export default function WorkoutScreen() {
   const { trigger } = useHaptics();
   
   const [celebration, setCelebration] = useState<null | { xp: number; sets: number; volume: number; streak: number }>(null);
-  
-  // Timer State
   const [restTime, setRestTime] = useState<number | null>(null);
   const [userRestPreference, setUserRestPreference] = useState(60);
-  
-  // Modals State
   const [detailsExerciseId, setDetailsExerciseId] = useState<string | null>(null);
   const [swapData, setSwapData] = useState<{ index: number; id: string; muscle: MuscleGroup } | null>(null);
   const [plateWeight, setPlateWeight] = useState<number | null>(null);
 
-  // ─── Celebration Overlay ───
   if (celebration) {
     return (
       <CelebrationScreen
@@ -59,7 +47,6 @@ export default function WorkoutScreen() {
     );
   }
 
-  // ─── Active Workout View (FOCUS MODE) ───
   if (activeWorkout) {
     const totalSets = activeWorkout.exercises.reduce((acc, ex) => acc + ex.sets.length, 0);
     const completedSets = activeWorkout.exercises.reduce((acc, ex) => acc + ex.sets.filter((s) => s.isCompleted).length, 0);
@@ -299,7 +286,6 @@ export default function WorkoutScreen() {
           )}
         </KeyboardAvoidingView>
 
-        {/* Premium Modals */}
         {detailsExerciseId && (
           <ExerciseDetailsModal visible={true} exerciseId={detailsExerciseId} onClose={() => setDetailsExerciseId(null)} />
         )}
@@ -319,7 +305,6 @@ export default function WorkoutScreen() {
     );
   }
 
-  // ─── Workout Selection View ───
   const weekDays = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
   const today = new Date().getDay();
   const adjustedToday = today === 0 ? 6 : today - 1;
@@ -347,7 +332,6 @@ export default function WorkoutScreen() {
             </View>
           </Animated.View>
 
-          {/* Week days */}
           <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast)} style={s.weekRow}>
             {weekDays.map((d, i) => (
               <TouchableOpacity key={d} style={[s.dayBtn, i === adjustedToday && s.dayBtnActive]} activeOpacity={0.8}>
@@ -359,7 +343,6 @@ export default function WorkoutScreen() {
             ))}
           </Animated.View>
 
-          {/* Templates */}
           {allTemplates.map((t, i) => (
             <Animated.View key={t.id} entering={FadeInDown.duration(400).delay(i * Stagger.fast + 100)}>
               <TouchableOpacity
@@ -408,7 +391,6 @@ const s = StyleSheet.create({
   subtitle: { color: Colors.primary, fontSize: 14, fontWeight: '600', marginTop: 4 },
   createBtn: { flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: Colors.primary, paddingHorizontal: 12, paddingVertical: 8, borderRadius: BorderRadius.full },
   createBtnText: { color: '#fff', fontSize: 13, fontWeight: '800' },
-  // Week
   weekRow: { flexDirection: 'row', gap: 6, marginBottom: 20 },
   dayBtn: { flex: 1, alignItems: 'center', paddingVertical: 10, borderRadius: BorderRadius.md, backgroundColor: Colors.bgCard, borderWidth: 1, borderColor: Colors.border },
   dayBtnActive: { backgroundColor: Colors.primary, borderColor: Colors.primary },
@@ -416,14 +398,12 @@ const s = StyleSheet.create({
   dayLabelActive: { color: '#fff' },
   dayNum: { color: Colors.textSecondary, fontSize: 16, fontWeight: '700', marginTop: 3 },
   dayNumActive: { color: '#fff' },
-  // Template
   templateCard: { borderRadius: BorderRadius.lg, padding: 16, flexDirection: 'row', alignItems: 'center', gap: 14, marginBottom: 10, borderWidth: 1, borderColor: Colors.border, backgroundColor: Colors.bgCard },
   customTemplateCard: { borderColor: Colors.primary + '50' },
   templateBadge: { width: 44, height: 44, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
   templateName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
   customLabel: { color: Colors.primary, fontSize: 11, fontWeight: '800' },
   templateDesc: { color: Colors.textMuted, fontSize: 13, marginTop: 2 },
-  // Active workout
   activeHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: Platform.OS === 'web' ? 16 : 54, paddingHorizontal: 16, paddingBottom: 12, backgroundColor: '#050505' },
   backBtn: { width: 42, height: 42, borderRadius: BorderRadius.md, backgroundColor: '#111', justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: '#333' },
   activeHeaderCenter: { alignItems: 'center' },

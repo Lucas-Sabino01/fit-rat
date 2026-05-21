@@ -1,14 +1,9 @@
-/**
- * Fit Rat — Exercise Library Screen
- */
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Colors, BorderRadius } from '@/constants/theme';
 import { MobileContainer } from '@/components/ui/MobileContainer';
-
-// Premium Modal
 import { ExerciseDetailsModal } from '@/components/workout/ExerciseDetailsModal';
 
 const MOCK_EXERCISES = [
@@ -97,7 +92,6 @@ export default function ExercisesLibraryScreen() {
         </ScrollView>
       </View>
 
-      {/* Reusing the modal from workout flow to show "Rat Tips" and animations */}
       {selectedId && (
         <ExerciseDetailsModal 
           visible={true} 

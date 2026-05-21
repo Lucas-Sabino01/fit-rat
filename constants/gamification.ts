@@ -1,9 +1,3 @@
-/**
- * Fit Rat — Gamification Constants
- * Rules for XP, levels, streaks, rest tickets, and belt progression
- */
-
-// ─── XP System ───────────────────────────────────────────────
 export const XP_PER_ACTION = {
   completeWorkout: 100,
   completeSet: 5,
@@ -15,29 +9,27 @@ export const XP_PER_ACTION = {
   streakBonus100: 500,
   personalRecord: 75,
 };
-
-// Level thresholds — XP required to reach each level
 export const LEVEL_THRESHOLDS = [
-  0,      // Level 1
-  100,    // Level 2
-  250,    // Level 3
-  500,    // Level 4
-  800,    // Level 5
-  1200,   // Level 6
-  1700,   // Level 7
-  2300,   // Level 8
-  3000,   // Level 9
-  3800,   // Level 10
-  4700,   // Level 11
-  5700,   // Level 12
-  6800,   // Level 13
-  8000,   // Level 14
-  9500,   // Level 15
-  11000,  // Level 16
-  13000,  // Level 17
-  15000,  // Level 18
-  17500,  // Level 19
-  20000,  // Level 20
+  0,
+  100,
+  250,
+  500,
+  800,
+  1200,
+  1700,
+  2300,
+  3000,
+  3800,
+  4700,
+  5700,
+  6800,
+  8000,
+  9500,
+  11000,
+  13000,
+  15000,
+  17500,
+  20000,
 ];
 
 export const MAX_LEVEL = LEVEL_THRESHOLDS.length;
@@ -65,11 +57,10 @@ export function getXPProgress(xp: number): { current: number; required: number; 
   };
 }
 
-// ─── Streak System ───────────────────────────────────────────
 export const STREAK_CONFIG = {
   maxRestTickets: 3,
-  restTicketRechargeEvery: 7, // days
-  microWorkoutDurationSec: 180, // 3 minutes
+  restTicketRechargeEvery: 7,
+  microWorkoutDurationSec: 180,
   activeRestOptions: [
     { id: 'stretching', label: 'Alongamento', duration: '5-10 min', icon: '🧘' },
     { id: 'walking', label: 'Caminhada', duration: '20-30 min', icon: '🚶' },
@@ -77,7 +68,6 @@ export const STREAK_CONFIG = {
   ],
 };
 
-// ─── Belt System (Faixas) ────────────────────────────────────
 export const BELTS = [
   { id: 'white', label: 'Branca', color: '#FFFFFF', requiredStreak: 0 },
   { id: 'blue', label: 'Azul', color: '#42A5F5', requiredStreak: 7 },
@@ -100,7 +90,6 @@ export function getNextBelt(streakDays: number) {
   return null;
 }
 
-// ─── Rat Evolution Stages ────────────────────────────────────
 export const RAT_STAGES = [
   { level: 1, label: 'Rato Iniciante', description: 'Acabou de chegar na academia' },
   { level: 5, label: 'Rato Dedicado', description: 'Já criou o hábito' },
@@ -116,7 +105,6 @@ export function getRatStage(level: number) {
   return RAT_STAGES[0];
 }
 
-// ─── Achievements ────────────────────────────────────────────
 export const ACHIEVEMENTS = [
   { id: 'first_workout', label: 'Primeiro Treino', icon: '🏋️', description: 'Complete seu primeiro treino' },
   { id: 'streak_7', label: '7 Dias Seguidos', icon: '🔥', description: '7 dias de ofensiva' },

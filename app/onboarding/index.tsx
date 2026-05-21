@@ -10,7 +10,6 @@ import { useHaptics } from '@/hooks/useHaptics';
 import { MobileContainer } from '@/components/ui/MobileContainer';
 import { RatMascot } from '@/components/mascot/RatMascot';
 
-// ─── Data Types ───
 type OnboardingData = {
   gender: string;
   objective: string;
@@ -60,12 +59,10 @@ export default function SuperOnboarding() {
 
   const finish = () => {
     trigger('success');
-    // Save minimal data to profile store if needed, then flag complete
     completeOnboarding();
     router.replace('/(tabs)/');
   };
 
-  // ─── Helpers ───
   const currentSection = SECTIONS.find(s => step >= s.start && step <= s.end);
   const progressPerc = currentSection ? ((step - currentSection.start + 1) / (currentSection.end - currentSection.start + 1)) * 100 : 0;
 
@@ -83,9 +80,8 @@ export default function SuperOnboarding() {
     });
   };
 
-  // ─── Renders ───
   const renderHeader = () => {
-    if (step === 0 || step === 14) return null; // No header for welcome and sync
+    if (step === 0 || step === 14) return null;
     return (
       <View style={s.header}>
         <TouchableOpacity style={s.backBtn} onPress={prevStep}>
@@ -449,33 +445,23 @@ const s = StyleSheet.create({
   btnDisabled: { opacity: 0.5 },
   mainBtnText: { color: '#fff', fontSize: 16, fontWeight: '800', letterSpacing: 1 },
   spacer: { flex: 1 },
-  
-  // Row options (Gender, Body Type)
   rowOptions: { flexDirection: 'row', gap: 16, justifyContent: 'center', marginTop: 20 },
   card: { flex: 1, backgroundColor: Colors.bgCard, padding: 20, borderRadius: BorderRadius.lg, alignItems: 'center', borderWidth: 2, borderColor: 'transparent' },
   cardActive: { borderColor: Colors.primary, backgroundColor: Colors.primaryBg },
   cardText: { color: Colors.textSecondary, fontSize: 16, fontWeight: '700', marginTop: 16 },
   cardTextActive: { color: Colors.primary },
   textLink: { color: Colors.textMuted, fontSize: 14, textAlign: 'center', textDecorationLine: 'underline' },
-
-  // List Cards (Objective, Location, Experience)
   listCard: { backgroundColor: Colors.bgCard, padding: 20, borderRadius: BorderRadius.lg, marginBottom: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   listCardActive: { backgroundColor: Colors.primary },
   listCardText: { color: Colors.textPrimary, fontSize: 16, fontWeight: '600' },
   listCardTextActive: { color: '#fff' },
-
-  // Feedback
   feedbackBox: { backgroundColor: Colors.successBg, padding: 16, borderRadius: BorderRadius.md, marginTop: 20, borderWidth: 1, borderColor: Colors.success },
   feedbackTitle: { color: Colors.success, fontSize: 16, fontWeight: '800', marginBottom: 4 },
   feedbackText: { color: Colors.success, fontSize: 14, lineHeight: 20 },
-
-  // Pills (Focus Area)
   pillBtn: { backgroundColor: Colors.bgCard, paddingVertical: 14, paddingHorizontal: 20, borderRadius: BorderRadius.full },
   pillBtnActive: { backgroundColor: Colors.primary },
   pillText: { color: Colors.textPrimary, fontSize: 15, fontWeight: '600' },
   pillTextActive: { color: '#fff' },
-
-  // Coach Selection
   coachCard: { backgroundColor: Colors.bgCard, padding: 16, borderRadius: BorderRadius.lg, marginBottom: 12, flexDirection: 'row', alignItems: 'center', gap: 16, borderWidth: 2, borderColor: 'transparent' },
   coachCardActive: { borderColor: Colors.primary, backgroundColor: Colors.primaryBg },
   coachIcon: { width: 60, height: 60, borderRadius: 30, backgroundColor: Colors.bgSurface, justifyContent: 'center', alignItems: 'center' },
@@ -483,28 +469,20 @@ const s = StyleSheet.create({
   coachTitleActive: { color: Colors.primary },
   coachDesc: { color: Colors.textSecondary, fontSize: 13, lineHeight: 18 },
   coachDescActive: { color: Colors.textPrimary },
-
-  // Years Scroll
   yearRow: { paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: Colors.border, alignItems: 'center' },
   yearRowActive: { backgroundColor: Colors.primaryBg, borderRadius: BorderRadius.md, borderBottomWidth: 0 },
   yearText: { color: Colors.textSecondary, fontSize: 20, fontWeight: '600' },
   yearTextActive: { color: Colors.primary, fontSize: 24, fontWeight: '800' },
-
-  // Big Input
   bigInputBox: { alignItems: 'center', marginTop: 40 },
   bigInputLabel: { color: Colors.textMuted, fontSize: 14, fontWeight: '700', marginBottom: 20 },
   bigInputValue: { color: Colors.textPrimary, fontSize: 54, fontWeight: '900', marginHorizontal: 30 },
   adjBtn: { width: 50, height: 50, borderRadius: 25, backgroundColor: Colors.bgSurface, justifyContent: 'center', alignItems: 'center' },
-
-  // Days Grid
   daysGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 12, marginTop: 20 },
   dayBox: { width: '30%', backgroundColor: Colors.bgCard, paddingVertical: 20, borderRadius: BorderRadius.md, alignItems: 'center', position: 'relative' },
   dayBoxActive: { backgroundColor: Colors.primary },
   dayText: { color: Colors.textPrimary, fontSize: 16, fontWeight: '700' },
   dayTextActive: { color: '#fff' },
   dayCheck: { position: 'absolute', top: -6, right: -6, width: 20, height: 20, borderRadius: 10, backgroundColor: Colors.success, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: Colors.bg },
-
-  // Auth
   authBox: { width: '100%', gap: 12, marginBottom: 30 },
   authBtn: { flexDirection: 'row', backgroundColor: Colors.bgCard, padding: 16, borderRadius: BorderRadius.md, alignItems: 'center', justifyContent: 'center', gap: 12 },
   authText: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },

@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Streak Store (v2 with Persistence)
- * Manages the user's workout streak, rest tickets, and streak history
- */
-
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,8 +10,6 @@ interface StreakStore {
   restTickets: number;
   lastWorkoutDate: string | null;
   streakHistory: StreakDay[];
-
-  // Actions
   recordWorkout: () => void;
   recordMicroWorkout: () => void;
   recordActiveRest: () => void;
@@ -148,8 +141,6 @@ export const useStreakStore = create<StreakStore>()(
     }
   )
 );
-
-// Generate mock history for the past 30 days for demo
 function generateMockHistory(): StreakDay[] {
   const history: StreakDay[] = [];
   const today = new Date();
@@ -158,8 +149,6 @@ function generateMockHistory(): StreakDay[] {
     const d = new Date(today);
     d.setDate(d.getDate() - i);
     const dateStr = d.toISOString().split('T')[0];
-
-    // Simulate a realistic streak pattern
     const rand = Math.random();
     if (rand > 0.15) {
       history.push({ date: dateStr, type: 'workout' });

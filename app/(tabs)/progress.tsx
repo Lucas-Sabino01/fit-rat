@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Progress Screen (v2 Redesign)
- * Tabs for Gamification (Streaks/XP) and Strength (Volume charts)
- */
-
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar, Platform, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -30,7 +25,6 @@ export default function ProgressScreen() {
   const [currentYear] = useState(new Date().getFullYear());
 
   React.useEffect(() => {
-    // Simulate initial data loading to show skeletons
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
@@ -62,8 +56,6 @@ export default function ProgressScreen() {
   ];
 
   const hasHistory = workoutHistory.length > 0;
-
-  // For Strength Chart
   const recentWorkouts = [...workoutHistory].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).slice(-7);
   const maxVolume = recentWorkouts.length > 0 ? Math.max(...recentWorkouts.map(w => w.volume)) : 1000;
 
@@ -92,7 +84,6 @@ export default function ProgressScreen() {
         <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
           {activeTab === 'gamification' ? (
             <Animated.View entering={FadeIn.duration(300)} key="gamification">
-              {/* Stats */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast)} style={s.statsRow}>
                 {stats.map((st, i) => (
                   <View key={i} style={s.statCard}>
@@ -105,7 +96,6 @@ export default function ProgressScreen() {
                 ))}
               </Animated.View>
 
-              {/* Calendar */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast * 2)}>
                 <View style={s.calCard}>
                   <Text style={s.calTitle}>{MONTHS[currentMonth]} {currentYear}</Text>
@@ -148,7 +138,6 @@ export default function ProgressScreen() {
                 </View>
               </Animated.View>
 
-              {/* History */}
               <Animated.View entering={FadeInDown.duration(400).delay(Stagger.fast * 3)}>
                 <Text style={s.histTitle}>HISTÓRICO RECENTE</Text>
               </Animated.View>
@@ -288,13 +277,11 @@ const s = StyleSheet.create({
   tabText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
   tabTextActive: { color: Colors.textPrimary },
   content: { paddingHorizontal: 20, paddingTop: 16 },
-  // Stats
   statsRow: { flexDirection: 'row', gap: 8, marginBottom: 16 },
   statCard: { flex: 1, backgroundColor: Colors.bgCard, borderRadius: BorderRadius.lg, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: Colors.border },
   statIconBg: { width: 36, height: 36, borderRadius: 12, justifyContent: 'center', alignItems: 'center', marginBottom: 8 },
   statValue: { color: Colors.textPrimary, fontSize: 20, fontWeight: '900' },
   statLabel: { color: Colors.textMuted, fontSize: 10, fontWeight: '600', marginTop: 4 },
-  // Calendar
   calCard: { borderRadius: BorderRadius.xl, padding: 18, borderWidth: 1, borderColor: Colors.border, marginBottom: 20, backgroundColor: Colors.bgCard },
   calTitle: { color: Colors.textPrimary, fontSize: 16, fontWeight: '700', textAlign: 'center', marginBottom: 14 },
   weekHeader: { flexDirection: 'row', marginBottom: 8 },
@@ -308,7 +295,6 @@ const s = StyleSheet.create({
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   legendDot: { width: 8, height: 8, borderRadius: 4 },
   legendText: { color: Colors.textMuted, fontSize: 10, fontWeight: '600' },
-  // Chart
   chartCard: { borderRadius: BorderRadius.xl, padding: 18, borderWidth: 1, borderColor: Colors.border, backgroundColor: Colors.bgCard },
   chartContainer: { flexDirection: 'row', height: 180 },
   chartYAxis: { justifyContent: 'space-between', paddingRight: 10, paddingVertical: 16 },
@@ -318,7 +304,6 @@ const s = StyleSheet.create({
   chartBarBg: { flex: 1, width: 14, backgroundColor: Colors.bgSurface, borderRadius: 7, justifyContent: 'flex-end', overflow: 'hidden', marginBottom: 8 },
   chartBarFill: { width: '100%', backgroundColor: Colors.primary, borderRadius: 7 },
   chartXLabel: { color: Colors.textMuted, fontSize: 10, fontWeight: '700' },
-  // History
   histTitle: { color: Colors.textPrimary, fontSize: 14, fontWeight: '800', letterSpacing: 1.5, marginBottom: 12 },
   histCard: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: Colors.bgCard, borderRadius: BorderRadius.lg, padding: 14, marginBottom: 8, borderWidth: 1, borderColor: Colors.border },
   histIconBg: { width: 40, height: 40, borderRadius: 12, backgroundColor: Colors.primaryBg, justifyContent: 'center', alignItems: 'center' },
@@ -327,11 +312,9 @@ const s = StyleSheet.create({
   histRight: { alignItems: 'flex-end' },
   histXP: { color: Colors.xp, fontSize: 13, fontWeight: '700' },
   histVol: { color: Colors.textMuted, fontSize: 11, marginTop: 2 },
-  // Placeholder
   placeholderFeature: { alignItems: 'center', paddingVertical: 20, gap: 8 },
   placeholderTitle: { color: Colors.textSecondary, fontSize: 16, fontWeight: '700' },
   placeholderSub: { color: Colors.textMuted, fontSize: 12, textAlign: 'center', paddingHorizontal: 20 },
-  // Empty state
   emptyState: { alignItems: 'center', paddingVertical: 32, gap: 12 },
   emptyTitle: { color: Colors.textPrimary, fontSize: 16, fontWeight: '700' },
   emptyText: { color: Colors.textMuted, fontSize: 13, textAlign: 'center', paddingHorizontal: 20 },

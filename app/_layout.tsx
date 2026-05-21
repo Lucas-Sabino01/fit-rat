@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Root Layout (v2)
- * Dark theme, loads Inter font on web
- */
-
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Platform } from 'react-native';
@@ -11,7 +6,6 @@ import { useEffect } from 'react';
 import { Colors } from '@/constants/theme';
 
 export default function RootLayout() {
-  // Inject Inter font on web
   useEffect(() => {
     if (Platform.OS !== 'web') return;
     if (typeof document === 'undefined') return;

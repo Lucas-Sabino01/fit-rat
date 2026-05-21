@@ -1,8 +1,3 @@
-/**
- * Fit Rat — XP Bar Component
- * Animated progress bar showing XP toward next level
- */
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, FontSizes, FontWeights, Spacing, BorderRadius } from '@/constants/theme';

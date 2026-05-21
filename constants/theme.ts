@@ -1,89 +1,53 @@
-/**
- * Fit Rat — Design System v2 (Duolingo-Inspired Redesign)
- * 
- * Key changes from v1:
- * - Layered dark backgrounds instead of flat black
- * - Multiple accent colors per section (not just red)
- * - Typography with hierarchy (not everything weight 900)
- * - Rounded, friendly aesthetic
- */
-
 import { Platform } from 'react-native';
 
-// ─── Color Palette ────────────────────────────────────────────
 export const Colors = {
-  // Background layers (GitHub Dark inspired - visible depth)
   bg: '#0D1117',
   bgCard: '#161B22',
   bgCardHover: '#1C2333',
   bgSurface: '#21262D',
   bgElevated: '#2D333B',
-
-  // Borders (subtle but visible)
   border: '#30363D',
   borderLight: '#3D444D',
   borderFocus: '#58A6FF',
-
-  // Primary — Vibrant Red (workout energy)
   primary: '#F85149',
   primaryDark: '#DA3633',
   primaryLight: '#FF7B72',
   primaryBg: 'rgba(248, 81, 73, 0.12)',
   primaryGlow: 'rgba(248, 81, 73, 0.4)',
-
-  // Streak — Orange/Fire
   streak: '#F0883E',
   streakDark: '#DB6D28',
   streakLight: '#FFA657',
   streakBg: 'rgba(240, 136, 62, 0.12)',
-
-  // XP — Gold
   xp: '#F4C145',
   xpDark: '#D29922',
   xpLight: '#F7D76E',
   xpBg: 'rgba(244, 193, 69, 0.12)',
-
-  // Success — Green (completions, checks)
   success: '#3FB950',
   successDark: '#2EA043',
   successLight: '#56D364',
   successBg: 'rgba(63, 185, 80, 0.12)',
-
-  // Trail — Blue (progress, exploration)
   trail: '#58A6FF',
   trailDark: '#388BFD',
   trailLight: '#79C0FF',
   trailBg: 'rgba(88, 166, 255, 0.12)',
-
-  // Evolution — Purple (level, prestige)
   evolution: '#BC8CFF',
   evolutionDark: '#A371F7',
   evolutionLight: '#D2A8FF',
   evolutionBg: 'rgba(188, 140, 255, 0.12)',
-
-  // Text hierarchy
   textPrimary: '#F0F6FC',
   textSecondary: '#8B949E',
   textMuted: '#6E7681',
   textDisabled: '#484F58',
-
-  // Status
   error: '#F85149',
   warning: '#F0883E',
   info: '#58A6FF',
-
-  // Belt colors
   beltWhite: '#F0F6FC',
   beltBlue: '#58A6FF',
   beltPurple: '#BC8CFF',
   beltBrown: '#C69026',
   beltBlack: '#8B949E',
-
-  // Overlay
   overlay: 'rgba(0, 0, 0, 0.65)',
   overlayLight: 'rgba(0, 0, 0, 0.35)',
-
-  // Deprecated compat aliases (remove over time)
   background: '#0D1117',
   card: '#161B22',
   cardBorder: '#30363D',
@@ -93,9 +57,6 @@ export const Colors = {
   tabBarActive: '#F85149',
   tabBarInactive: '#6E7681',
 } as const;
-
-// ─── Typography ─────────────────────────────────────────────
-// We'll load Inter via expo-font in _layout.tsx
 export const FontFamily = {
   regular: Platform.select({
     web: "'Inter', 'Segoe UI', system-ui, sans-serif",
@@ -146,7 +107,6 @@ export const FontWeights = {
   black: '900' as const,
 };
 
-// ─── Spacing ────────────────────────────────────────────────
 export const Spacing = {
   xs: 4,
   sm: 8,
@@ -160,7 +120,6 @@ export const Spacing = {
   '5xl': 64,
 } as const;
 
-// ─── Border Radius ──────────────────────────────────────────
 export const BorderRadius = {
   sm: 8,
   md: 12,
@@ -170,7 +129,6 @@ export const BorderRadius = {
   full: 9999,
 } as const;
 
-// ─── Shadows ────────────────────────────────────────────────
 export const Shadows = {
   card: {
     shadowColor: '#000',
@@ -195,7 +153,6 @@ export const Shadows = {
   },
 } as const;
 
-// ─── Gradients (preset arrays for LinearGradient) ───────────
 export const Gradients = {
   primaryCta: ['#F85149', '#DA3633'] as const,
   streakFire: ['#F0883E', '#DB6D28'] as const,

@@ -14,8 +14,6 @@ interface SwapExerciseModalProps {
 
 export function SwapExerciseModal({ visible, onClose, currentExerciseId, muscleGroup, onSwap }: SwapExerciseModalProps) {
   const [search, setSearch] = useState('');
-
-  // Filtra por grupo muscular, remove o atual, e permite busca
   const availableExercises = EXERCISES.filter(ex => 
     ex.muscleGroup === muscleGroup && 
     ex.id !== currentExerciseId &&

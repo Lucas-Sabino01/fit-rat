@@ -1,14 +1,7 @@
-/**
- * Fit Rat — Rat Avatar Component (Redesigned)
- * Uses real generated images instead of emojis
- */
-
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
 import { Colors, FontSizes, FontWeights, Spacing, BorderRadius } from '@/constants/theme';
-
-// Import rat images
 const RAT_IMAGES = {
   beginner: require('@/assets/images/rat-beginner.png'),
   main: require('@/assets/images/rat-main.png'),
@@ -47,7 +40,6 @@ export function RatAvatar({ stage, size = 'medium', showInfo = true }: RatAvatar
 
   return (
     <View style={styles.container}>
-      {/* Glow ring */}
       <View
         style={[
           styles.glowRing,

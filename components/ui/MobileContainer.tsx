@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Mobile Container v2
- * Constrains content to mobile width on web/desktop
- */
-
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { Colors } from '@/constants/theme';
@@ -34,7 +29,6 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 430,
     backgroundColor: Colors.bg,
-    // Subtle phone frame effect on web
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderColor: Colors.border,

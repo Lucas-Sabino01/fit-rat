@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Tab Layout (v2 Redesign)
- * Premium dark tab bar with colorful icons, floating center button
- */
-
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';

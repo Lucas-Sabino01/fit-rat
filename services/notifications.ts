@@ -1,13 +1,7 @@
-/**
- * Fit Rat — Push Notifications Service
- * Infrastructure for streak reminders, workout encouragement
- */
-
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import { Platform } from 'react-native';
 
-// ─── Configuration ──────────────────────────────────────────
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -17,7 +11,6 @@ Notifications.setNotificationHandler({
   }),
 });
 
-// ─── Permission Request ─────────────────────────────────────
 export async function requestNotificationPermissions(): Promise<boolean> {
   if (Platform.OS === 'web') return false;
 
@@ -37,8 +30,6 @@ export async function requestNotificationPermissions(): Promise<boolean> {
   if (finalStatus !== 'granted') {
     return false;
   }
-
-  // Android notification channel
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('streak-reminders', {
       name: 'Lembretes de Ofensiva',
@@ -56,8 +47,6 @@ export async function requestNotificationPermissions(): Promise<boolean> {
   return true;
 }
 
-// ─── Notification Templates ─────────────────────────────────
-
 const STREAK_MESSAGES = [
   { title: '🐀 Seu rato está triste!', body: 'Você ainda não treinou hoje. Nem um micro-treino de 3 min?' },
   { title: '🔥 Não deixe a chama apagar!', body: 'Sua ofensiva de {streak} dias está em risco!' },
@@ -71,16 +60,12 @@ const CELEBRATION_MESSAGES = [
   { title: '🐀💪 O rato está ficando forte!', body: 'Continue assim e desbloqueie a próxima evolução!' },
 ];
 
-// ─── Schedule Streak Reminder ───────────────────────────────
 export async function scheduleStreakReminder(streakDays: number): Promise<string | null> {
   try {
-    // Cancel existing streak reminders
     await cancelStreakReminders();
 
     const message = STREAK_MESSAGES[Math.floor(Math.random() * STREAK_MESSAGES.length)];
     const body = message.body.replace('{streak}', String(streakDays));
-
-    // Schedule for 8 PM today (or tomorrow if already past)
     const now = new Date();
     const triggerDate = new Date();
     triggerDate.setHours(20, 0, 0, 0);
@@ -108,10 +93,8 @@ export async function scheduleStreakReminder(streakDays: number): Promise<string
   }
 }
 
-// ─── Schedule Daily Motivation ──────────────────────────────
 export async function scheduleDailyMotivation(): Promise<string | null> {
   try {
-    // Schedule for 7 AM daily
     const id = await Notifications.scheduleNotificationAsync({
       content: {
         title: '🐀 Bom dia, Ratão!',
@@ -133,7 +116,6 @@ export async function scheduleDailyMotivation(): Promise<string | null> {
   }
 }
 
-// ─── Cancel ─────────────────────────────────────────────────
 export async function cancelStreakReminders() {
   const scheduled = await Notifications.getAllScheduledNotificationsAsync();
   for (const n of scheduled) {
@@ -147,7 +129,6 @@ export async function cancelAllNotifications() {
   await Notifications.cancelAllScheduledNotificationsAsync();
 }
 
-// ─── Get Push Token ─────────────────────────────────────────
 export async function getExpoPushToken(): Promise<string | null> {
   try {
     const token = await Notifications.getExpoPushTokenAsync();

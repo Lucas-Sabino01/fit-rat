@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Profile Store (v2 with Persistence)
- * User profile, XP, level, and achievements
- */
-
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,14 +12,10 @@ interface ProfileStore {
   joinedAt: string;
   unlockedAchievements: string[];
   hasCompletedOnboarding: boolean;
-
-  // Computed-like getters
   getLevel: () => number;
   getXPProgress: () => { current: number; required: number; percentage: number };
   getRatStage: () => { level: number; label: string; description: string };
   getAchievements: () => (Achievement & { isUnlocked: boolean })[];
-
-  // Actions
   addXP: (amount: number) => void;
   incrementWorkouts: () => void;
   addVolume: (kg: number) => void;
@@ -92,7 +83,6 @@ export const useProfileStore = create<ProfileStore>()(
     {
       name: 'fitrat-profile',
       storage: createJSONStorage(() => AsyncStorage),
-      // Only persist data fields, not getters
       partialize: (state) => ({
         name: state.name,
         xp: state.xp,

@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Rat Mascot Component (Animated)
- * Procedural animations using Reanimated to bring the mascot to life
- */
-
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, { 
@@ -37,19 +32,14 @@ const MOOD_CONFIG: Record<RatMood, { emoji: string; bg: string; border: string; 
 
 export function RatMascot({ mood = 'default', size = 100, showLabel = false, label }: RatMascotProps) {
   const config = MOOD_CONFIG[mood];
-
-  // Animation values
   const scaleY = useSharedValue(1);
   const translateY = useSharedValue(0);
   const rotation = useSharedValue(0);
 
   useEffect(() => {
-    // Reset values on mood change
     scaleY.value = 1;
     translateY.value = 0;
     rotation.value = 0;
-
-    // Breathing effect (squash and stretch)
     scaleY.value = withRepeat(
       withSequence(
         withTiming(1.05, { duration: 1200, easing: Easing.inOut(Easing.ease) }),
@@ -58,8 +48,6 @@ export function RatMascot({ mood = 'default', size = 100, showLabel = false, lab
       -1,
       true
     );
-
-    // Floating effect based on mood
     if (mood === 'excited' || mood === 'celebrating') {
       translateY.value = withRepeat(
         withSequence(
@@ -80,7 +68,6 @@ export function RatMascot({ mood = 'default', size = 100, showLabel = false, lab
         );
       }
     } else if (mood === 'sleeping') {
-      // Slow breathing for sleeping
       scaleY.value = withRepeat(
         withSequence(
           withTiming(1.03, { duration: 2000, easing: Easing.inOut(Easing.ease) }),
@@ -90,7 +77,6 @@ export function RatMascot({ mood = 'default', size = 100, showLabel = false, lab
         true
       );
     } else {
-      // Default subtle float
       translateY.value = withRepeat(
         withSequence(
           withTiming(-4, { duration: 1500, easing: Easing.inOut(Easing.ease) }),

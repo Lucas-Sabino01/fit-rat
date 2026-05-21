@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Quick Actions Component
- * Action buttons for starting workouts, micro-treino, and rest tickets
- */
-
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors, FontSizes, FontWeights, Spacing, BorderRadius } from '@/constants/theme';
@@ -24,13 +19,11 @@ export function QuickActions({
 }: QuickActionsProps) {
   return (
     <View style={styles.container}>
-      {/* Main CTA */}
       <TouchableOpacity style={styles.mainButton} onPress={onStartWorkout} activeOpacity={0.8}>
         <Text style={styles.mainButtonIcon}>🏋️</Text>
         <Text style={styles.mainButtonText}>COMEÇAR TREINO</Text>
       </TouchableOpacity>
 
-      {/* Secondary actions */}
       <View style={styles.secondaryRow}>
         <TouchableOpacity style={styles.secondaryButton} onPress={onMicroWorkout} activeOpacity={0.7}>
           <Text style={styles.secondaryIcon}>⚡</Text>
@@ -53,7 +46,6 @@ export function QuickActions({
         </TouchableOpacity>
       </View>
 
-      {/* Ticket info */}
       <View style={styles.ticketInfo}>
         <Text style={styles.ticketInfoIcon}>🎟️</Text>
         <Text style={styles.ticketInfoText}>

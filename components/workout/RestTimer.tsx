@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Rest Timer
- * A gamified circular rest timer with sound/haptic feedback
- */
-
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS } from 'react-native-reanimated';
@@ -20,8 +15,6 @@ export function RestTimer({ durationSeconds, onFinish, onSkip }: RestTimerProps)
   const [timeLeft, setTimeLeft] = useState(durationSeconds);
   const progress = useSharedValue(1);
   const { trigger } = useHaptics();
-
-  // Reference for the total duration to calculate progress percentage correctly
   const [totalDuration, setTotalDuration] = useState(durationSeconds);
 
   useEffect(() => {
@@ -36,14 +29,14 @@ export function RestTimer({ durationSeconds, onFinish, onSkip }: RestTimerProps)
           return 0;
         }
         if (prev <= 4) {
-          trigger('light'); // Tick tick tick effect for last 3 seconds
+          trigger('light');
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []); // Run only once to start the interval, manual changes handled below
+  }, []);
 
   const adjustTime = (amount: number) => {
     trigger('light');

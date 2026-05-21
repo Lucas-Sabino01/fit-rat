@@ -25,8 +25,6 @@ export default function WorkoutBuilderScreen() {
       trigger('error');
       return;
     }
-    
-    // Auto-detect muscle groups based on selected exercises
     const mGroups = new Set<MuscleGroup>();
     selectedExercises.forEach(id => {
       const ex = EXERCISES.find(e => e.id === id);
@@ -105,7 +103,6 @@ export default function WorkoutBuilderScreen() {
         </ScrollView>
 
         <ScrollView style={s.libraryScroll} contentContainerStyle={s.libraryContent}>
-          {/* Create custom button */}
           <View style={s.createExContainer}>
             {isCreatingExercise ? (
               <View style={s.createExForm}>
@@ -174,7 +171,6 @@ export default function WorkoutBuilderScreen() {
       <View style={s.screen}>
         <StatusBar barStyle="light-content" />
         
-        {/* Header */}
         <View style={s.header}>
           <TouchableOpacity onPress={() => router.back()} style={s.headerBtn}>
             <Ionicons name="chevron-back" size={24} color={Colors.textPrimary} />
@@ -268,8 +264,6 @@ const s = StyleSheet.create({
   addBtn: { borderRadius: BorderRadius.lg, overflow: 'hidden' },
   addBtnGradient: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 16, gap: 8 },
   addBtnText: { color: '#fff', fontSize: 14, fontWeight: '800', letterSpacing: 1 },
-  
-  // Modal
   modalContainer: { flex: 1, backgroundColor: Colors.bg },
   modalHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 20, borderBottomWidth: 1, borderBottomColor: Colors.border },
   modalTitle: { color: Colors.textPrimary, fontSize: 18, fontWeight: '800' },

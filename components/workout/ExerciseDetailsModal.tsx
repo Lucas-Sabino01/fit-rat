@@ -26,7 +26,6 @@ export function ExerciseDetailsModal({ visible, onClose, exerciseId }: ExerciseD
         </View>
 
         <ScrollView style={s.content} showsVerticalScrollIndicator={false}>
-          {/* Header Info */}
           <View style={s.mainInfo}>
             <View style={s.iconBg}>
               <Text style={{ fontSize: 40 }}>{exercise.icon}</Text>
@@ -35,7 +34,6 @@ export function ExerciseDetailsModal({ visible, onClose, exerciseId }: ExerciseD
             <Text style={s.subtitle}>{MUSCLE_GROUP_LABELS[exercise.muscleGroup]} · {exercise.equipment}</Text>
           </View>
 
-          {/* Animation/GIF Placeholder */}
           <View style={s.section}>
             <Text style={s.sectionTitle}>ANIMAÇÃO DE EXECUÇÃO</Text>
             <View style={s.gifPlaceholder}>
@@ -44,7 +42,6 @@ export function ExerciseDetailsModal({ visible, onClose, exerciseId }: ExerciseD
             </View>
           </View>
 
-          {/* Rat Tip */}
           <View style={s.section}>
             <Text style={s.sectionTitle}>DICA DO RATO 🐀</Text>
             <View style={s.ratTipCard}>
@@ -57,7 +54,6 @@ export function ExerciseDetailsModal({ visible, onClose, exerciseId }: ExerciseD
             </View>
           </View>
 
-          {/* Fake Graph for 1RM */}
           <View style={s.section}>
             <Text style={s.sectionTitle}>PROGRESSÃO (1RM ESTIMADO)</Text>
             <View style={s.graphPlaceholder}>
@@ -67,7 +63,6 @@ export function ExerciseDetailsModal({ visible, onClose, exerciseId }: ExerciseD
             </View>
           </View>
 
-          {/* Fake History */}
           <View style={s.section}>
             <Text style={s.sectionTitle}>HISTÓRICO RECENTE</Text>
             {[
@@ -85,7 +80,6 @@ export function ExerciseDetailsModal({ visible, onClose, exerciseId }: ExerciseD
             ))}
           </View>
 
-          {/* Fake Instructions */}
           <View style={s.section}>
             <Text style={s.sectionTitle}>COMO EXECUTAR</Text>
             <View style={s.instructionBox}>
@@ -115,27 +109,19 @@ const s = StyleSheet.create({
   subtitle: { color: Colors.primary, fontSize: 14, fontWeight: '600', marginTop: 4 },
   section: { marginBottom: 28 },
   sectionTitle: { color: Colors.textMuted, fontSize: 11, fontWeight: '800', letterSpacing: 1.5, marginBottom: 12 },
-  
-  // GIF Placeholder
   gifPlaceholder: { height: 160, backgroundColor: Colors.bgSurface, borderRadius: BorderRadius.lg, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: Colors.border },
   gifText: { color: Colors.textDisabled, fontSize: 13, fontWeight: '600', marginTop: 8 },
-
-  // Rat Tip
   ratTipCard: { flexDirection: 'row', backgroundColor: Colors.primary + '15', borderRadius: BorderRadius.lg, padding: 16, alignItems: 'center', borderWidth: 1, borderColor: Colors.primary + '30' },
   ratTipBubble: { flex: 1, marginLeft: 16, backgroundColor: Colors.bgCard, padding: 12, borderRadius: BorderRadius.md, borderWidth: 1, borderColor: Colors.border },
   ratTipText: { color: Colors.textPrimary, fontSize: 13, fontWeight: '600', fontStyle: 'italic', lineHeight: 20 },
-
-  // Graph
   graphPlaceholder: { backgroundColor: Colors.bgCard, borderRadius: BorderRadius.lg, padding: 24, alignItems: 'center', borderWidth: 1, borderColor: Colors.border, borderStyle: 'dashed' },
   graphText: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700', marginTop: 12 },
   graphSub: { color: Colors.success, fontSize: 13, fontWeight: '600', marginTop: 4 },
-  // History
   historyRow: { flexDirection: 'row', alignItems: 'center', gap: 14, marginBottom: 16, marginLeft: 8 },
   histDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: Colors.primary },
   histInfo: { flex: 1 },
   histDate: { color: Colors.textSecondary, fontSize: 14, fontWeight: '600' },
   histVol: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
-  // Instructions
   instructionBox: { backgroundColor: Colors.bgSurface, borderRadius: BorderRadius.lg, padding: 16 },
   instructionText: { color: Colors.textSecondary, fontSize: 14, lineHeight: 24 },
 });

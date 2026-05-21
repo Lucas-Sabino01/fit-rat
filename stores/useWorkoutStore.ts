@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Workout Store
- * State machine for active workout tracking
- */
-
 import { create } from 'zustand';
 import type { ActiveWorkout, WorkoutExercise, WorkoutSet, WorkoutStatus, WorkoutHistory } from '@/types';
 import { getExerciseById, WORKOUT_TEMPLATES, WorkoutTemplate, Exercise } from '@/constants/exercises';
@@ -15,8 +10,6 @@ interface WorkoutStore {
   customExercises: Exercise[];
   restTimerSeconds: number;
   isRestTimerRunning: boolean;
-
-  // Actions
   startWorkout: (templateId: string) => void;
   startCustomWorkout: (name: string, exerciseIds: string[]) => void;
   completeSet: (exerciseIndex: number, setIndex: number, reps: number, weight: number) => void;
@@ -164,11 +157,7 @@ export const useWorkoutStore = create<WorkoutStore>((set, get) => ({
       const exercises = [...activeWorkout.exercises];
       const sets = [...exercises[exerciseIndex].sets];
       
-      // Do not remove if it's the last set, just clear it maybe? 
-      // Actually, standard apps allow removing even the last set, but then you'd have 0 sets.
       sets.splice(setIndex, 1);
-      
-      // Re-index remaining sets to keep IDs consistent (1, 2, 3...)
       const updatedSets = sets.map((s, i) => ({ ...s, id: i + 1 }));
 
       exercises[exerciseIndex] = {

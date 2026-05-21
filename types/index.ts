@@ -1,10 +1,5 @@
-/**
- * Fit Rat — TypeScript Type Definitions
- */
-
 import type { MuscleGroup } from '@/constants/exercises';
 
-// ─── Profile ─────────────────────────────────────────────────
 export interface UserProfile {
   name: string;
   xp: number;
@@ -12,24 +7,22 @@ export interface UserProfile {
   avatarStage: number;
   joinedAt: string;
   totalWorkouts: number;
-  totalVolume: number; // kg total levantado
+  totalVolume: number;
 }
 
-// ─── Streak ──────────────────────────────────────────────────
 export interface StreakState {
   currentStreak: number;
   bestStreak: number;
   restTickets: number;
-  lastWorkoutDate: string | null; // ISO date
+  lastWorkoutDate: string | null;
   streakHistory: StreakDay[];
 }
 
 export interface StreakDay {
-  date: string; // YYYY-MM-DD
+  date: string;
   type: 'workout' | 'active_rest' | 'micro' | 'ticket' | 'rest' | 'missed';
 }
 
-// ─── Workout ─────────────────────────────────────────────────
 export type WorkoutStatus = 'idle' | 'active' | 'paused' | 'completed';
 
 export interface ActiveWorkout {
@@ -60,20 +53,18 @@ export interface WorkoutSet {
   isPersonalRecord?: boolean;
 }
 
-// ─── Workout History ─────────────────────────────────────────
 export interface WorkoutHistory {
   id: string;
   name: string;
   date: string;
-  duration: number; // seconds
+  duration: number;
   exercises: number;
   sets: number;
-  volume: number; // kg
+  volume: number;
   xpEarned: number;
-  rating?: 1 | 2 | 3; // Fácil, Bom, Pesado
+  rating?: 1 | 2 | 3;
 }
 
-// ─── Achievements ────────────────────────────────────────────
 export interface Achievement {
   id: string;
   label: string;
@@ -82,7 +73,6 @@ export interface Achievement {
   unlockedAt?: string;
 }
 
-// ─── Trail (Trilha) ──────────────────────────────────────────
 export interface TrailPhase {
   id: number;
   name: string;

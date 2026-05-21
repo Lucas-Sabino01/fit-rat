@@ -1,6 +1,3 @@
-/**
- * Fit Rat — Settings Modal
- */
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,14 +14,12 @@ export default function SettingsScreen() {
   return (
     <MobileContainer>
       <View style={s.screen}>
-        {/* Header */}
         <View style={s.header}>
           <TouchableOpacity onPress={() => router.back()} style={s.backBtn}>
             <Ionicons name="close" size={24} color={Colors.textPrimary} />
           </TouchableOpacity>
           <Text style={s.title}>Configurações</Text>
-          <View style={{ width: 40 }} /> {/* Spacer */}
-        </View>
+          <View style={{ width: 40 }} />        </View>
 
         <ScrollView contentContainerStyle={s.content}>
           <Text style={s.sectionTitle}>CONTA</Text>

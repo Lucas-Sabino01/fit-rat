@@ -1,8 +1,3 @@
-/**
- * Fit Rat — Trail Path Connector
- * Visual line connecting trail nodes
- */
-
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/theme';
@@ -19,7 +14,6 @@ export function TrailPath({ completed, color }: TrailPathProps) {
         styles.line,
         completed && { backgroundColor: color },
       ]}>
-        {/* Dot decorations */}
         <View style={[styles.dot, completed && { backgroundColor: color }]} />
         <View style={[styles.dot, completed && { backgroundColor: color }, { top: '50%' }]} />
       </View>
